@@ -36,7 +36,7 @@ const page = () => {
 
 
   const deleteReserve = (id:number) =>{
-    axios.delete(`http://localhost:8080/api/reservebook${id}`).then(() =>{
+    axios.delete(`http://localhost:8080/api/reservebook/${id}`).then(() =>{
       setreserveMade(reserveMade.filter(r => r.id !== id));
             Swal.fire({
                    title: 'Reserve deleted successful!',
@@ -83,13 +83,13 @@ const page = () => {
                    </tr>
                 </thead>
                 <tbody>
-                   {reserveMade.map((l) =>(
-                    <tr className='text-center' key={l.id}>
-                        <td>{l.name}</td>
-                        <td>{l.author}</td>
-                        <td>{l.reservedate}</td>
+                   {reserveMade.map((r) =>(
+                    <tr className='text-center' key={r.id}>
+                        <td>{r.name}</td>
+                        <td>{r.author}</td>
+                        <td>{r.reservedate}</td>
                         <td>
-                          <button style={{width:'calc(70% - 20px)', backgroundColor:'red', color:'white'}} className='bg-red-700' onClick={() => deleteReserve(l.id)}>Delete</button>
+                          <button style={{width:'calc(70% - 20px)', backgroundColor:'red', color:'white'}} className='bg-red-700' onClick={() => deleteReserve(r.id)}>Delete</button>
                         </td>
                     </tr>
                    ))}

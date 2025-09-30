@@ -86,7 +86,7 @@ const variants = {
                     <td>{r.book_name}</td>
                       <td>{r.response}</td>
                     <td>
-                      <button style={{padding:5, width:'70px', backgroundColor:'var(--color-blue-950)', color:'white', marginTop:-12}}>update</button>
+                      {/* <button style={{padding:5, width:'70px', backgroundColor:'var(--color-blue-950)', color:'white', marginTop:-12}}>update</button> */}
                       <button onClick={() => deleteRequest(r.id)}  style={{padding:5, width:'70px', marginLeft:5, backgroundColor:' var(--color-red-800)', color:'white'}}>Delete</button> 
                     </td>
                   </tr>

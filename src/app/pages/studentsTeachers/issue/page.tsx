@@ -85,10 +85,10 @@ const page = () => {
                 </thead>
                 <tbody>
                    {IssueGiven.map((l) =>(
-                    <tr className='text-center' key={l.id}>
-                        <td>{l.book}</td>
-                        <td>{l.author}</td>
-                        <td>{l.member}</td>
+                    <tr style={{padding:10}} className='text-center' key={l.id}>
+                        <td style={{padding:10}}>{l.book}</td>
+                        <td style={{padding:10}}>{l.author}</td>
+                        <td style={{padding:10}}>{l.member}</td>
                     </tr>
                    ))}
                 </tbody>

@@ -9,15 +9,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import Sidebar from '@/app/components/Sidebar';
-interface data {
-    image:string;
-    name: string;
-    author:string;
-}
-type Book = {
-  name: string;
-  author: string;
-  // imageBase64?: string;
+
+type Rules = {
+ title:string;
+  one:string;
+  two:string;
+  three:string;
+  four:string;
+  five:string;
 };
 
 const page = () => {
@@ -27,35 +26,37 @@ const page = () => {
     threshold: 0.2,
   });
 
-    const [addBook, setaddBook] = useState<Book>({
-    // image:"",
-      name:"",
-      author:"",
+    const [addRules, setaddRules] = useState<Rules>({
+        title:"",
+      one:"",
+      two:"",
+      three:"",
+      four:"",
+      five:"",
     })
     
 
   const handleSubmit = ()=>{
-    if(!addBook.name || !addBook.author){
+    if( !addRules.title ||!addRules.one || !addRules.two || !addRules.three){
         Swal.fire({
      title: 'Error!',
-      text: 'Fill in to add a book.',
+      text: 'Fill in to add the rules.',
       icon: 'error',
       confirmButtonText: 'OK',
       confirmButtonColor:'darkblue'
         })
     }
     else{
-      axios.post("http://localhost:8080/api/book", addBook).then((res) =>{
-        // setaddBook({image:"", name:"", author:""});
-        setaddBook(res.data)
+      axios.post("http://localhost:8080/api/rules", addRules).then((res) =>{
+        setaddRules(res.data);
              Swal.fire({
-      title: 'Book added successful!',
-      text: 'You have successfully added a book.',
+      title: 'Rules added successful!',
+      text: 'You have successfully added the Rules.',
       icon: 'success',
       confirmButtonText: 'OK',
         confirmButtonColor:'darkblue'
         })
-        router.push('/pages/librarian/bookdashboard');
+        router.push('/pages/librarian/TheRules');
       })
       .catch((error) => {
         console.error(error);
@@ -63,6 +64,8 @@ const page = () => {
   
     }
   }
+
+
   
   return (
     <div>
@@ -85,50 +88,38 @@ const page = () => {
       initial={{ x: -100, opacity: 0 }}
       animate={inView ? { x: 0, opacity: 1 } : {}}
       transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }} >
-            <h1>Add a Book</h1>
+            <h1>State out the Rules</h1>
             <br />
-          {/* <input type='file' value={addBook.image} placeholder='Enter BookImage' onChange={(e) => setaddBook({...addBook, image: e.target.value})} /> */}
-          <br />
-          {/* <img src="http://localhost:8080/users/1/image" alt="Profile" /> */}
-
             <br /> 
-          <input type='text' value={addBook.name} placeholder='Enter Name' onChange={(e) => setaddBook({...addBook, name: e.target.value})} />
+            <input type='text' value={addRules.title} placeholder='Title' onChange={(e) => setaddRules({...addRules, title: e.target.value})} />
           <br />
             <br />
-          <input type='text' value={addBook.author} placeholder='Enter Author' onChange={(e) => setaddBook({...addBook, author:e.target.value})} />
+          <input type='text' value={addRules.one} placeholder='Rule 1' onChange={(e) => setaddRules({...addRules, one: e.target.value})} />
+          <br />
+            <br />
+          <input type='text' value={addRules.two} placeholder='Rule 2' onChange={(e) => setaddRules({...addRules, two:e.target.value})} />
+          <br />
+          <br />
+            <input  type='text' value={addRules.three} placeholder='Rule 3' onChange={(e) => setaddRules({...addRules, three:e.target.value})} />
+          <br />
+            <br />
+            <input type='text' value={addRules.four} placeholder='Rule 4' onChange={(e) => setaddRules({...addRules, four:e.target.value})} />
+          <br />
+            <br />
+            <input type='text' value={addRules.five} placeholder='Rule 5' onChange={(e) => setaddRules({...addRules, five:e.target.value})} />
           <br />
             <br />
           <button style={{marginBottom:30}} onClick={handleSubmit} className='bg-blue-900 text-white'>Submit</button> </motion.div>
         <br />
         <br />
-        </div>       
+        </div>  
+
+
              </div>
         </motion.div>
+
+
       </div>
-
-
-          {/* <div className='overall-register bg-blue-900 flex flex-wrap justify-between'>
-            <br />
-            <motion.div className='register'
-      ref={ref}
-      initial={{ x: -100, opacity: 0 }}
-      animate={inView ? { x: 0, opacity: 1 } : {}}
-      transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }} >
-            <h1>Add a Book</h1>
-            <br />
-          <input type='file' value={addBook.image} placeholder='Enter BookImage' onChange={(e) => setaddBook({...addBook, image: e.target.value})} />
-          <br />
-            <br /> 
-          <input type='text' value={addBook.name} placeholder='Enter Name' onChange={(e) => setaddBook({...addBook, name: e.target.value})} />
-          <br />
-            <br />
-          <input type='text' value={addBook.author} placeholder='Enter Author' onChange={(e) => setaddBook({...addBook, author:e.target.value})} />
-          <br />
-            <br />
-          <button style={{marginBottom:30}} onClick={handleSubmit} className='bg-blue-900 text-white'>Submit</button> </motion.div>
-        <br />
-        <br />
-        </div> */}
 
     </div>
   )

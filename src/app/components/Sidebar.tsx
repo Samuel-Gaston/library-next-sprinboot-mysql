@@ -44,12 +44,20 @@ const Sidebar = () => {
             <Link style={{marginLeft:5,}} href='/pages/librarian/borrowmadedashboard'>Borrows Made</Link>
             </li>
 
+             <li><MdLightMode size={20} className='inline' />
+            <Link style={{marginLeft:5,}} href='/pages/librarian/renewmadedashboard'>Renews Made</Link>
+            </li>
+
             <li><RiReservedFill size={20} className='inline' />
             <Link style={{marginLeft:5,}} href='/pages/librarian/reservemadedashboard'>Reserves Made</Link>
             </li>
 
             <li><FiGitPullRequest size={20} className='inline' />
             <Link style={{marginLeft:5,}} href='/pages/librarian/requestmadedashboard'>Requests Made</Link>
+            </li>
+
+            <li><CiGift size={20} className='inline' />
+            <Link style={{marginLeft:5,}} href='/pages/librarian/TheRules'>The Rules</Link>
             </li>
           </ul>
     </div>

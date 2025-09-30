@@ -84,7 +84,7 @@ const page = () => {
                     <td className='text-center'>{r.book_name}</td>
                     <td className='text-center'>{r.status}</td>
                     <td className='text-center'>
-                      <button style={{padding:5, width:'70px', backgroundColor:'var(--color-blue-950)', color:'white', marginTop:-12}}>update</button>
+                      {/* <button style={{padding:5, width:'70px', backgroundColor:'var(--color-blue-950)', color:'white', marginTop:-12}}>update</button> */}
                       <button onClick={() => deleteRenew(r.id)}  style={{padding:5, width:'70px', marginLeft:5, backgroundColor:' var(--color-red-800)', color:'white'}}>Delete</button> 
                     </td>
                   </tr>

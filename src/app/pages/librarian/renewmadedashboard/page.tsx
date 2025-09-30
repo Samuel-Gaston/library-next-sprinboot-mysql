@@ -11,23 +11,23 @@ import axios from 'axios';
 import Sidebar from '@/app/components/Sidebar';
 const page = () => {
 
-
     const variants = {
                 hidden:{opacity:0, x:-100},
                 visible:{opacity:1, x:0}
               }
  const router = useRouter();
 
+
     const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
 
-  const [requestMade, setrequestMade] = useState([])
+  const [renewMade, setrenewMade] = useState([])
 
   const getAllReserve = () =>{
-    axios.get("http://localhost:8080/api/requestBook").then((res) =>{
-        setrequestMade(res.data)
+    axios.get("http://localhost:8080/api/renewBook").then((res) =>{
+        setrenewMade(res.data)
     })
   }
 
@@ -37,11 +37,11 @@ const page = () => {
 
 
   const deleteReserve = (id:number) =>{
-    axios.delete(`http://localhost:8080/api/requestBook/${id}`).then(() =>{
-      setrequestMade(requestMade.filter(r => r.id !== id));
+    axios.delete(`http://localhost:8080/api/renewBook/${id}`).then(() =>{
+      setrenewMade(renewMade.filter(r => r.id !== id));
             Swal.fire({
-                   title: 'Request deleted successful!',
-                   text: 'You have successfully deleted this request.',
+                   title: 'Renewal deleted successful!',
+                   text: 'You have successfully deleted this renewal.',
                    icon: 'success',
                    confirmButtonText: 'OK',
                      confirmButtonColor:'darkblue'
@@ -72,25 +72,25 @@ const page = () => {
       transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}>
    <div className='overall-borrow flex flex-wrap justify-between'>
             <br />
-            <motion.div style={{width:'calc(100% - 20px)'}} className='requestMade'>
-            <h1 style={{marginTop:50}} className='text-center text-3xl text-blue-950 font-bold'>The Requests Made</h1>
+            <motion.div style={{width:'calc(100% - 20px)'}} className='renewMade'>
+            <h1 style={{marginTop:50}} className='text-center text-3xl text-blue-950 font-bold'>The Renewals Made</h1>
             <br />
             <table className='table'>
                 <thead>
                    <tr>
                      <th>Book_Name</th>
                     <th>Author</th>
-                    <th>loan_Date</th>
+                    <th>Renew_Date</th>
                    </tr>
                 </thead>
                 <tbody>
-                   {requestMade.map((re) =>(
-                    <tr className='text-center' key={re.id}>
-                        <td>{re.name}</td>
-                        <td>{re.author}</td>
-                        <td>{re.requestdate}</td>
+                   {renewMade.map((r) =>(
+                    <tr className='text-center' key={r.id}>
+                        <td>{r.name}</td>
+                        <td>{r.author}</td>
+                        <td>{r.renewdate}</td>
                         <td>
-                          <button style={{width:'calc(70% - 20px)', backgroundColor:'red', color:'white'}} className='bg-red-700' onClick={() => deleteReserve(re.id)}>Delete</button>
+                          <button style={{width:'calc(70% - 20px)', backgroundColor:'red', color:'white'}} className='bg-red-700' onClick={() => deleteReserve(r.id)}>Delete</button>
                         </td>
                     </tr>
                    ))}

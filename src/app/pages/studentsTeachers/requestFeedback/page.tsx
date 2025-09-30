@@ -9,7 +9,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import SidebarStudentTeacher from '@/app/components/SidebarStudentTeacher';
-
 const page = () => {
 
     const variants = {
@@ -23,32 +22,32 @@ const page = () => {
     threshold: 0.2,
   });
 
-  const [loanHistory, setloanHistory] = useState([])
+  const [RequestFeedback, setRequestFeedback] = useState([])
 
-  const getAllBorrow = () =>{
-    axios.get("http://localhost:8080/api/borrow").then((res) =>{
-        setloanHistory(res.data)
+  const getAllRequestFeedback = () =>{
+    axios.get("http://localhost:8080/api/renew").then((res) =>{
+        setRequestFeedback(res.data)
     })
   }
 
   useEffect(() =>{
-    getAllBorrow();
+    getAllRequestFeedback();
   },[])
 
-  //  const deleteLoanHistory = (id:number) =>{
-  //   axios.delete(`http://localhost:8080/api/borrow/${id}`).then(() =>{
-  //     setloanHistory(loanHistory.filter(loanH => loanH.id !== id));
-  //        Swal.fire({
-  //                  title: 'Loan deleted successful!',
-  //                  text: 'You have successfully deleted a Loan History.',
-  //                  icon: 'success',
-  //                  confirmButtonText: 'OK',
-  //                    confirmButtonColor:'darkblue'
-  //                    })
-  //   }).catch((error) =>{
-  //     console.log(error)
-  //   })
-  //  }
+//    const deleteRequestFeedback = (id:number) =>{
+//     axios.delete(`http://localhost:8080/api/borrow/${id}`).then(() =>{
+//       setRequestFeedback(RequestFeedback.filter(loanH => loanH.id !== id));
+//          Swal.fire({
+//                    title: 'Loan deleted successful!',
+//                    text: 'You have successfully deleted a Loan History.',
+//                    icon: 'success',
+//                    confirmButtonText: 'OK',
+//                      confirmButtonColor:'darkblue'
+//                      })
+//     }).catch((error) =>{
+//       console.log(error)
+//     })
+//    }
 
  
   return (
@@ -68,43 +67,34 @@ const page = () => {
              <div className='right-book'>
    <div className='overall-borrow flex flex-wrap justify-between'>
             <br />
-            <motion.div className='loanHistory'
+            <motion.div style={{ width:'calc(100% - 20px)'}} className='RequestFeedback'
       ref={ref}
       initial={{ x: -100, opacity: 0 }}
       animate={inView ? { x: 0, opacity: 1 } : {}}
       transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }} >
-            <h1 style={{marginTop:50}} className='text-center text-3xl text-blue-950 font-bold'>The Loan History</h1>
+            <h1 style={{marginTop:50}} className='text-center text-3xl text-blue-950 font-bold'>The Request Feedback</h1>
             <br />
             <table className='table'>
                 <thead>
-                   <tr>
-                     <th>Book_Name</th>
-                    <th>Author</th>
-                    <th>loan_Date</th>
-                   </tr>
+                  <tr>
+                      <th>Book_Name</th>
+                    <th>Status</th>
+                  </tr>
                 </thead>
                 <tbody>
-                   {loanHistory.map((l) =>(
-                    <tr style={{padding:10}} className='text-center' key={l.id}>
-                        <td style={{padding:10}}>{l.name}</td>
-                        <td style={{padding:10}}>{l.author}</td>
-                        <td style={{padding:10}}>{l.borrowdate}</td>
+                   {RequestFeedback.map((l) =>(
+                    <tr className='text-center' key={l.id}>
+                        <td>{l.book_name}</td>
+                        <td>{l.status}</td>
                     </tr>
                    ))}
                 </tbody>
             </table>
 
-
-
-
  </motion.div>
         <br />
         </div>
-
-           
-              
-              
-             </div>
+       </div>
         </motion.div>
       </div>
 

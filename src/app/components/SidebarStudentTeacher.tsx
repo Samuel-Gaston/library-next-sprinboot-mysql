@@ -50,7 +50,7 @@ const SidebarStudentTeacher = () => {
                     </li>
 
                        <li><VscGitPullRequestGoToChanges size={20} className='inline' />
-                    <Link style={{marginLeft:2,}} href='/pages/studentsTeachers/renewalFeeback'>Renew Feedback</Link>
+                    <Link style={{marginLeft:2,}} href='/pages/studentsTeachers/renewalFeedback'>Renew Feedback</Link>
                     </li>
 
                     <li><IoNotifications size={20} className='inline' />

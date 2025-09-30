@@ -112,7 +112,7 @@ const page = () => {
                         <td>{b.author}</td>
                         <td>{b.member}</td>
                         <td>
-                            <button style={{padding:5, width:'70px', backgroundColor:'var(--color-blue-950)', color:'white', marginTop:-12}}><Link style={{textDecoration:'none', color:'white'}} href='/pages/librarian/bookdashboard/edit'>update</Link></button>
+                            {/* <button style={{padding:5, width:'70px', backgroundColor:'var(--color-blue-950)', color:'white', marginTop:-12}}><Link style={{textDecoration:'none', color:'white'}} href='/pages/librarian/bookdashboard/edit'>update</Link></button> */}
                             <button  onClick={() => deleteIssue(b.id)} style={{padding:5, width:'70px', marginLeft:5, backgroundColor:' var(--color-red-800)', color:'white'}}>Delete</button>                   
                         </td>
                     </tr>

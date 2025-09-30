@@ -1,14 +1,11 @@
 'use client';
-import { useState, useEffect } from 'react';
 import React from 'react'
 import '../../components/Nav.css';
 import Link from 'next/link';
-import axios from 'axios';
-import Footer from '@/app/components/Footer';
 import { easeOut, motion} from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import SidebarStudentTeacher from '@/app/components/SidebarStudentTeacher';
 const page = () => {
+
 
            const variants = {
                 hidden:{opacity:0, x:-100},
@@ -25,11 +22,12 @@ const page = () => {
               transition={{ duration: 0.5}}>
             <div className='left-book bg-blue-950'>
     <div className='logo'><span style={{fontSize:50,color:'orange', fontWeight:'bold'}}>L</span><span style={{fontSize:40,color:'white', fontWeight:'bold'}}>i</span><span style={{fontSize:35,color:'orange', fontWeight:'bold'}}>b</span><span style={{fontSize:25, color:'white', fontWeight:'bold'}}>rary</span></div>
-          
-         <SidebarStudentTeacher />
+          <SidebarStudentTeacher />
+         
+         {/* <SidebarStudentTeacher />
          <div className='flex flex-wrap justify-center'>
              <button><Link href='/'>Logout</Link></button>
-         </div>
+         </div> */}
             </div>
              <div className='right-book'>
                 <h1 style={{marginTop:20, marginBottom:30}} className=' text-blue-950 text-3xl font-bold'>Students/Teachers</h1>
@@ -60,7 +58,7 @@ const page = () => {
               </div>
                <div className='right3'>
              <Link href='/pages/studentsTeachers/renew'>
-                             <h1>Notifications</h1>
+                <h1>Notifications</h1>
              </Link>
               </div>
              </div>

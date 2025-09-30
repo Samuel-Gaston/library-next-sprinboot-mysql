@@ -9,6 +9,7 @@ import { easeOut, motion} from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Sidebar from '@/app/components/Sidebar';
 import { MdLightbulb } from "react-icons/md";
+import { useRouter } from 'next/navigation';
 const page = () => {
 
            const variants = {
@@ -29,7 +30,7 @@ const page = () => {
           
          <Sidebar />
          <div className='flex flex-wrap justify-center'>
-             <button><Link style={{textDecoration:'none', color:'black'}} href='/'>Logout</Link></button>
+             {/* <button><Link style={{textDecoration:'none', color:'black'}} href='/'>Logout</Link></button> */}
          </div>
             </div>
              <div className='right-book'>

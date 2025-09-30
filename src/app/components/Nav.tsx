@@ -35,10 +35,20 @@ const Nav = () => {
     axios.get("http://localhost:8080/api/book").then((res) =>{
            setbook(res.data);
     })
-  }
-
+      }
   useEffect(() =>{
     getAllBooks()
+  },[]);
+
+
+      const [AllRules, setAllRules] = useState([])
+  const getAllRules = () =>{
+    axios.get("http://localhost:8080/api/rules").then((res) =>{
+        setAllRules(res.data)
+    })
+  }
+  useEffect(() => {
+    getAllRules();
   },[]);
     
   return (
@@ -50,8 +60,9 @@ const Nav = () => {
             <div style={{marginLeft:110}} className='logo'><span className='text-blue-900' style={{fontSize:50, fontWeight:'bold'}}>L</span><span style={{fontSize:40,color:'black', fontWeight:'bold'}}>i</span><span className='text-blue-900' style={{fontSize:35, fontWeight:'bold'}}>b</span><span style={{fontSize:25, color:'black', fontWeight:'bold'}}>rary</span></div>
             <ul>
                 <li><a href='#home'>Home</a></li>
-                 <li><a href='#store'>Store</a></li>
+                <li><a href='#store'>Store</a></li>
                 <li><a href='#about'>About</a></li>
+                <li><a href='#rule'>Rules</a></li>
                 <li><a href='#faqs'>FAQs</a></li>
                 <button><Link style={{textDecoration:'none'}} href='/pages/login'>Sign-In</Link></button>
             </ul>
@@ -171,10 +182,47 @@ const Nav = () => {
         </div>
      </motion.div>
 
+      <h1 id='rule' style={{marginTop:80, marginBottom:50}} className='text-center text-3xl font-bold'>The Rules and Regulations</h1>
+     <motion.div className=''
+        variants={variants}
+      initial="hidden"
+     whileInView= "visible"
+     viewport={{once:true, amount:0.5}}
+      transition={{ duration: 0.5}}>
+                 <div className='rule grid grid-cols-2' style={{marginLeft:50, marginRight:50, gap:10}}>
+                  {AllRules.map((r) => (
+                    <div style={{padding:10, boxShadow:'0 0 2px', marginBottom:10}} key={r.id}>
+                          <div style={{padding:5}}>
+                            <p className='text-black font-bold text-xl'>{r.title}</p>
+                        </div>
+                        <div style={{padding:5}}>
+                            <p className='text-black'>1- {r.one}</p>
+                        </div>
+                        <div style={{padding:5}}>
+                            <p>2- {r.two}</p>
+                        </div>
+                        <div style={{padding:5}}>
+                            <p>3- {r.three}</p>
+                        </div>
+                        <div style={{padding:5}}>
+                            <p>4- {r.four}</p>
+                        </div>
+                        <div style={{padding:5}}>
+                            <p>5- {r.five}</p>
+                        </div>
+          </div>
+                  ))}
+                 </div>
+     </motion.div>
 
-        <div style={{marginBottom:150}} id="faqs" className="faqs">
+
+        <div style={{marginBottom:150,}} id="faqs" className="faqs">
           <br />
           <br />
+           <br />
+            <br />
+             <br />
+             
  <motion.div className='flex flex-wrap justify-center'
        variants={variants}
       initial="hidden"

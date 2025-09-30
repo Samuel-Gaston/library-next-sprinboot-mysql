@@ -91,7 +91,7 @@ html{
 .right-content img{
    background-color: aliceblue;
    background-blend-mode: multiply;
-   margin-left: 100;
+   margin-left: 80;
 }
 .but button{
     background-color: white;
@@ -375,11 +375,21 @@ details[open] summary{
 /* The FAQS ends here */
 
 
+/* The rules */
+.rule h1{
+   font-size: 20;
+}
+.rule p{
+    font-size: 15;
+}
+/* the rules end here */
+
 /* The Dashboard starts here */
 .book{
     display: flex;
     flex-wrap: wrap;
     gap: 10;
+    background-color: aliceblue;
     /* background-color: rgb(237, 245, 252); */
     /* background-color: rgb(198, 217, 234); */
 }
@@ -425,6 +435,7 @@ details[open] summary{
 .right-book{
     width: calc(75.77% - 20px);
     padding: 10;
+   
 }
 .right-book button{
         margin-top: 10;
@@ -442,7 +453,7 @@ details[open] summary{
 }
 .right-book table{
     width: calc(100%);
-    background-color: aliceblue;
+    background-color: white;
     margin-top: 20;
 }
 .right-book th{
@@ -497,7 +508,7 @@ details[open] summary{
   margin-top: 30;
 margin-bottom: 400;
 border-radius: 20;
-background-color: aliceblue; 
+background-color: white; 
 
  width:calc(50% - 20px);
 }
@@ -592,6 +603,11 @@ background-color: aliceblue;
     .Cards{
         display: grid;
         grid-template-columns: 1fr 1fr;
+    }
+
+    .rule{
+  display: grid;
+  grid-template-columns: 1fr;
     }
 
     /* The footer starts here */
@@ -706,6 +722,11 @@ background-color: aliceblue;
     display: grid;
     grid-template-columns: 1fr;
    }
+
+    .rule{
+  display: grid;
+  grid-template-columns: 1fr;
+    }
 
    /* The login starts here */
       .login{

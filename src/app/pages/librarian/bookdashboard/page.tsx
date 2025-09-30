@@ -144,7 +144,7 @@ type Book = {
               <h1 style={{marginTop:30}} className='text-center text-3xl text-blue-950 font-bold'>The Books Interface</h1>
               <br />
               <button><Link style={{textDecoration:'none', color:'black'}} href='/pages/librarian/bookdashboard/add'>Add</Link></button>
-              <table className='table'>
+               <table className='table'>
                 <thead>
                     <tr>
                     {/* <th>Picture</th> */}
@@ -160,7 +160,7 @@ type Book = {
                         <td>{b.name}</td>
                       <td>{b.author}</td>
                         <td>
-                            <button style={{padding:5, width:'70px', backgroundColor:'var(--color-blue-950)', color:'white', marginTop:-12}}><Link style={{textDecoration:'none', color:'white'}} href='/pages/librarian/bookdashboard/edit'>update</Link></button>
+                            {/* <button style={{padding:5, width:'70px', backgroundColor:'var(--color-blue-950)', color:'white', marginTop:-12}}><Link style={{textDecoration:'none', color:'white'}} href='/pages/librarian/bookdashboard/edit'>update</Link></button> */}
                             <button  onClick={() => deleteBook(b.id)} style={{padding:5, width:'70px', marginLeft:5, backgroundColor:' var(--color-red-800)', color:'white'}}>Delete</button>                   
                         </td>
                     </tr>
