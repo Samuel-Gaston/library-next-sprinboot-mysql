@@ -160,7 +160,7 @@ const Nav = () => {
      whileInView= "visible"
      viewport={{once:true, amount:0.5}}
       transition={{ duration: 0.5}}>
-           <div className="grid grid-cols-4 gap-4" style={{marginLeft:50, marginRight:50,}}>
+           <div className="Cards grid grid-cols-4 gap-4" style={{marginLeft:50, marginRight:50,}}>
         {books.map((book) => (
           <div key={book.id} className="shadow flex flex-col items-center" style={{boxShadow:'0 0 1px'}}>
             {book.imageBase64 && (
