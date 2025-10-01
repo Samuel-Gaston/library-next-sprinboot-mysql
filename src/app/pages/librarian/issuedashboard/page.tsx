@@ -9,6 +9,12 @@ import Swal from 'sweetalert2';
 import {motion} from 'framer-motion'
 import { useInView } from 'react-intersection-observer';
 import { useRouter } from 'next/navigation';
+type Issue = {
+  id:number;
+  book:string;
+  author:string;
+  member:string;
+}
 const page = () => {
 
      const variants = {
@@ -23,7 +29,7 @@ const page = () => {
         threshold: 0.2,
       });
 
-    const [Issue, setIssue] = useState([])
+    const [Issue, setIssue] = useState<Issue[]>([])
   
   const getAllIssue = () =>{
   axios.get("http://localhost:8080/api/issue").then((res) =>{
@@ -33,6 +39,22 @@ const page = () => {
   useEffect(() => {
     getAllIssue();
   }, []);
+
+    const handleLogout = () => {
+      Swal.fire({
+        title: "Are you sure you want to logout?",
+        icon: "warning",
+        showCancelButton: true,        
+        confirmButtonText: "Yes",     
+        cancelButtonText: "No",        
+        reverseButtons: true,      
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/");
+        } 
+        // else: user clicked "No" or closed the dialog → do nothing
+      });
+    };
 
   // const getOneBook = () =>{
   //   axios.get(`http://localhost:8080/api/Issue/${id}`).then((res) =>{
@@ -84,7 +106,7 @@ const page = () => {
           
          <Sidebar />
          <div className='flex flex-wrap justify-center'>
-             <button><Link style={{textDecoration:'none', color:'black'}} href='/'>Logout</Link></button>
+             <button onClick={handleLogout}>Logout</button>
          </div>
             </div>
             

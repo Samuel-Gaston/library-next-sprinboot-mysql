@@ -9,12 +9,33 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import SidebarStudentTeacher from '@/app/components/SidebarStudentTeacher';
+type RequestFeedback = {
+  id:number;
+  book_name:string;
+  status:string;
+}
 const page = () => {
 
     const variants = {
                 hidden:{opacity:0, x:-100},
                 visible:{opacity:1, x:0}
               }
+
+                const handleLogout = () => {
+                  Swal.fire({
+                    title: "Are you sure you want to logout?",
+                    icon: "warning",
+                    showCancelButton: true,        
+                    confirmButtonText: "Yes",     
+                    cancelButtonText: "No",        
+                    reverseButtons: true,      
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      router.push("/");
+                    } 
+                    // else: user clicked "No" or closed the dialog → do nothing
+                  });
+                };
  const router = useRouter();
 
     const { ref, inView } = useInView({
@@ -22,7 +43,7 @@ const page = () => {
     threshold: 0.2,
   });
 
-  const [RequestFeedback, setRequestFeedback] = useState([])
+  const [RequestFeedback, setRequestFeedback] = useState<RequestFeedback[]>([])
 
   const getAllRequestFeedback = () =>{
     axios.get("http://localhost:8080/api/renew").then((res) =>{
@@ -60,7 +81,7 @@ const page = () => {
     <div className='logo'><span style={{fontSize:50,color:'orange', fontWeight:'bold'}}>L</span><span style={{fontSize:40,color:'white', fontWeight:'bold'}}>i</span><span style={{fontSize:35,color:'orange', fontWeight:'bold'}}>b</span><span style={{fontSize:25, color:'white', fontWeight:'bold'}}>rary</span></div>
       <SidebarStudentTeacher />
          <div className='flex flex-wrap justify-center'>
-             <button><Link style={{textDecoration:'none', color:'black'}} href='/'>Logout</Link></button>
+             <button onClick={handleLogout}>Logout</button>
          </div>
             </div>
 

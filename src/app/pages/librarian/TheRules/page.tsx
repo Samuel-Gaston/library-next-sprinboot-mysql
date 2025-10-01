@@ -9,7 +9,15 @@ import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
 import {motion} from 'framer-motion';
-
+type Rules = {
+  id:number;
+  title:string;
+  one:string;
+  two:string;
+  three:string;
+  four:string;
+  five:string;
+}
 const page = () => {
 
 
@@ -25,7 +33,7 @@ const page = () => {
       threshold: 0.2,
     });
 
-      const [AllRules, setAllRules] = useState([])
+      const [AllRules, setAllRules] = useState<Rules[]>([])
   const getAllRules = () =>{
     axios.get("http://localhost:8080/api/rules").then((res) =>{
         setAllRules(res.data)
@@ -51,6 +59,21 @@ const page = () => {
   }
 
 
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Are you sure you want to logout?",
+      icon: "warning",
+      showCancelButton: true,        
+      confirmButtonText: "Yes",     
+      cancelButtonText: "No",        
+      reverseButtons: true,      
+    }).then((result) => {
+      if (result.isConfirmed) {
+        router.push("/");
+      } 
+      // else: user clicked "No" or closed the dialog → do nothing
+    });
+  };
 
   return (
     <div>
@@ -62,7 +85,7 @@ const page = () => {
           
          <Sidebar />
          <div className='flex flex-wrap justify-center'>
-             <button><Link style={{textDecoration:'none', color:'black'}} href='/'>Logout</Link></button>
+             <button onClick={handleLogout}>Logout</button>
          </div>
             </div>
             

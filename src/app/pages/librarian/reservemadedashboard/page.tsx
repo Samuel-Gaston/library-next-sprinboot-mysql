@@ -9,6 +9,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import Sidebar from '@/app/components/Sidebar';
+type ReserveMade = {
+  id:number;
+  name:string;
+  author:string;
+  reservedate:string;
+}
 const page = () => {
 
     const variants = {
@@ -22,7 +28,7 @@ const page = () => {
     threshold: 0.2,
   });
 
-  const [reserveMade, setreserveMade] = useState([])
+  const [reserveMade, setreserveMade] = useState<ReserveMade[]>([])
 
   const getAllReserve = () =>{
     axios.get("http://localhost:8080/api/reservebook").then((res) =>{
@@ -49,6 +55,22 @@ const page = () => {
       console.log(error);
     })
   }
+
+    const handleLogout = () => {
+      Swal.fire({
+        title: "Are you sure you want to logout?",
+        icon: "warning",
+        showCancelButton: true,        
+        confirmButtonText: "Yes",     
+        cancelButtonText: "No",        
+        reverseButtons: true,      
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/");
+        } 
+        // else: user clicked "No" or closed the dialog → do nothing
+      });
+    };
  
   return (
     <div>
@@ -60,7 +82,7 @@ const page = () => {
     <div className='logo'><span style={{fontSize:50,color:'orange', fontWeight:'bold'}}>L</span><span style={{fontSize:40,color:'white', fontWeight:'bold'}}>i</span><span style={{fontSize:35,color:'orange', fontWeight:'bold'}}>b</span><span style={{fontSize:25, color:'white', fontWeight:'bold'}}>rary</span></div>
       <Sidebar />
          <div className='flex flex-wrap justify-center'>
-             <button><Link style={{textDecoration:'none', color:'black'}} href='/'>Logout</Link></button>
+             <button onClick={handleLogout}>Logout</button>
          </div>
             </div>
 

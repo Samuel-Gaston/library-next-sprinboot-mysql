@@ -9,7 +9,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import SidebarStudentTeacher from '@/app/components/SidebarStudentTeacher';
-
+type Issue = {
+  id:number;
+  book:string;
+  author:string;
+  member:string;
+}
 const page = () => {
 
     const variants = {
@@ -18,12 +23,28 @@ const page = () => {
               }
  const router = useRouter();
 
+   const handleLogout = () => {
+     Swal.fire({
+       title: "Are you sure you want to logout?",
+       icon: "warning",
+       showCancelButton: true,        
+       confirmButtonText: "Yes",     
+       cancelButtonText: "No",        
+       reverseButtons: true,      
+     }).then((result) => {
+       if (result.isConfirmed) {
+         router.push("/");
+       } 
+       // else: user clicked "No" or closed the dialog → do nothing
+     });
+   };
+
     const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
 
-  const [IssueGiven, setIssueGiven] = useState([])
+  const [IssueGiven, setIssueGiven] = useState<Issue[]>([])
 
   const getAllIssues = () =>{
     axios.get("http://localhost:8080/api/issue").then((res) =>{
@@ -61,7 +82,7 @@ const page = () => {
     <div className='logo'><span style={{fontSize:50,color:'orange', fontWeight:'bold'}}>L</span><span style={{fontSize:40,color:'white', fontWeight:'bold'}}>i</span><span style={{fontSize:35,color:'orange', fontWeight:'bold'}}>b</span><span style={{fontSize:25, color:'white', fontWeight:'bold'}}>rary</span></div>
       <SidebarStudentTeacher />
          <div className='flex flex-wrap justify-center'>
-             <button><Link style={{textDecoration:'none', color:'black'}}  href='/'>Logout</Link></button>
+             <button onClick={handleLogout}>Logout</button>
          </div>
             </div>
 

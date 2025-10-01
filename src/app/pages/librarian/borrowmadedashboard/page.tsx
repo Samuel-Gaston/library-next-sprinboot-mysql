@@ -9,8 +9,29 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import Sidebar from '@/app/components/Sidebar';
-
+type Borrow = {
+  id:number;
+  name:string;
+  author:string;
+  borrowdate:string;
+}
 const page = () => {
+
+    const handleLogout = () => {
+      Swal.fire({
+        title: "Are you sure you want to logout?",
+        icon: "warning",
+        showCancelButton: true,        
+        confirmButtonText: "Yes",     
+        cancelButtonText: "No",        
+        reverseButtons: true,      
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/");
+        } 
+        // else: user clicked "No" or closed the dialog → do nothing
+      });
+    };
 
     const variants = {
                 hidden:{opacity:0, x:-100},
@@ -23,7 +44,7 @@ const page = () => {
     threshold: 0.2,
   });
 
-  const [borrowMade, setborrowMade] = useState([])
+  const [borrowMade, setborrowMade] = useState<Borrow[]>([])
 
   const getAllBorrow = () =>{
     axios.get("http://localhost:8080/api/borrow").then((res) =>{
@@ -62,7 +83,7 @@ const page = () => {
     <div className='logo'><span style={{fontSize:50,color:'orange', fontWeight:'bold'}}>L</span><span style={{fontSize:40,color:'white', fontWeight:'bold'}}>i</span><span style={{fontSize:35,color:'orange', fontWeight:'bold'}}>b</span><span style={{fontSize:25, color:'white', fontWeight:'bold'}}>rary</span></div>
      <Sidebar />
          <div className='flex flex-wrap justify-center'>
-             <button><Link style={{textDecoration:'none', color:'black'}} href='/'>Logout</Link></button>
+             <button onClick={handleLogout}>Logout</button>
          </div>
             </div>
 

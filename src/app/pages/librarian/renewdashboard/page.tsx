@@ -9,6 +9,11 @@ import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
 import {motion} from 'framer-motion'
+type renew = {
+  id:number;
+  book_name:string;
+  status:string;
+}
 const page = () => {
 
   const variants = {
@@ -23,7 +28,7 @@ const page = () => {
         threshold: 0.2,
       });
 
-    const [renew, setrenew] = useState([])
+    const [renew, setrenew] = useState<renew[]>([])
   
   const getAllRenew = () =>{
   axios.get("http://localhost:8080/api/renew").then((res) =>{
@@ -49,6 +54,22 @@ const page = () => {
    })
       }
 
+        const handleLogout = () => {
+          Swal.fire({
+            title: "Are you sure you want to logout?",
+            icon: "warning",
+            showCancelButton: true,        
+            confirmButtonText: "Yes",     
+            cancelButtonText: "No",        
+            reverseButtons: true,      
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/");
+            } 
+            // else: user clicked "No" or closed the dialog → do nothing
+          });
+        };
+
   return (
     <div>
       <div>
@@ -58,7 +79,7 @@ const page = () => {
           
        <Sidebar />
          <div className='flex flex-wrap justify-center'>
-             <button><Link style={{textDecoration:'none', color:'black'}} href='/'>Logout</Link></button>
+             <button onClick={handleLogout}>Logout</button>
          </div>
             </div>
             

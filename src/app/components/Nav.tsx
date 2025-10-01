@@ -14,10 +14,21 @@ import { MdLibraryBooks } from "react-icons/md";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import { FaHandshakeSimple } from "react-icons/fa6";
 type Book = {
+  id:number;
   name: string;
   author: string;
-  imageBase64?: string; // optional
+  imageBase64?: string; 
 };
+
+type Rules = {
+    id:number;
+    title:string;
+    one:string;
+    two:string;
+    three:string;
+    four:string;
+    five:string;
+}
 
 const Nav = () => {
          const { ref, inView } = useInView({
@@ -30,26 +41,31 @@ const Nav = () => {
             visible:{opacity:1, x:0}
           }
 
-          const [book, setbook] = useState([])
-          const getAllBooks = () =>{
-    axios.get("http://localhost:8080/api/book").then((res) =>{
-           setbook(res.data);
-    })
-      }
-  useEffect(() =>{
-    getAllBooks()
-  },[]);
-
-
-      const [AllRules, setAllRules] = useState([])
+  const [AllRules, setAllRules] = useState<Rules[]>([])
   const getAllRules = () =>{
-    axios.get("http://localhost:8080/api/rules").then((res) =>{
+    axios.get<Rules[]>("http://localhost:8080/api/rules").then((res) =>{
         setAllRules(res.data)
     })
   }
   useEffect(() => {
     getAllRules();
   },[]);
+
+
+
+  const [books, setBooks] = useState<Book[]>([]);
+  useEffect(() => {
+    axios
+      .get<Book[]>("http://localhost:8080/api/book")
+      .then((res) => {
+        setBooks(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching books:", err);
+      })
+  }, []);
+
+
     
   return (
     <div>
@@ -116,8 +132,9 @@ const Nav = () => {
        
 
 
-   <motion.div id='store' className='All'>
+   <div id='store' className='All'>
 <br />
+
      <motion.div className='overall-cards'
       variants={variants}
       initial="hidden"
@@ -137,27 +154,31 @@ const Nav = () => {
        </div>
      </motion.div>
 
-
-     <motion.div className='overall-cards'
-     variants={variants}
+     <motion.div className='overall-cards' style={{marginTop:10}}
+          variants={variants}
       initial="hidden"
      whileInView= "visible"
      viewport={{once:true, amount:0.5}}
-      transition={{ duration: 0.5}} style={{marginTop:20}}>
-      <div style={{gap:10, marginLeft:50, marginRight:50}} className='Cards grid grid-cols-4 justify-center'>
-        {book.map((books) =>(
-          <div style={{boxShadow:'0 0 1px', gap:10, padding:30, marginBottom:30, backgroundColor:'white', marginTop:30}} key={books.id}>
-            {/* <Image style={{width:90}} src={books.src} alt={books.name} width={200} height={200} /> */}
-            <h1 style={{fontSize:20, marginBottom:0}} className='text-center font-bold'>{books.name}</h1>
-            <p className='text-center'>{books.author}</p>
-            <button style={{ width:'calc(70% - 20px)', marginLeft:30}} className='bg-blue-900 flex flex-wrap justify-center'><Link href='/pages/login'>Borrow</Link></button>
-        </div>
+      transition={{ duration: 0.5}}>
+           <div className="grid grid-cols-4 gap-4" style={{marginLeft:50, marginRight:50,}}>
+        {books.map((book) => (
+          <div key={book.id} className="shadow flex flex-col items-center" style={{boxShadow:'0 0 1px'}}>
+            {book.imageBase64 && (
+              <img
+                src={`data:image/jpeg;base64,${book.imageBase64}`}
+                alt={book.name}
+                className="w-32 h-40 object-cover mb-2"
+              />
+            )}
+          <p className='font-bold text-center'>{book.name}</p>
+          <p className='text-center'>{book.author}</p>
+            <button style={{marginBottom:30, padding:3, width:'calc(50% - 20px)', marginTop:10}} className='bg-blue-900 text-center flex flex-wrap justify-center text-white'><Link href='/pages/login'>Borrow</Link></button>
+          </div>
         ))}
       </div>
      </motion.div>
 
-
-      </motion.div>
+      </div>
 
 
 

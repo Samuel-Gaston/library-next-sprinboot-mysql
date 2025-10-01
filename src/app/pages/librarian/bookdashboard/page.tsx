@@ -11,18 +11,28 @@ import { useInView } from 'react-intersection-observer';
 import {motion} from 'framer-motion';
 
 const page = () => {
-type Book = {
-  name: string;
-  author: string;
-  // imageBase64?: string;
-};
-    const [addBook, setaddBook] = useState<Book>({
+
+    const [addBook, setaddBook] = useState({
     // image:"",
       name:"",
       author:"",
     })
+      const handleLogout = () => {
+        Swal.fire({
+          title: "Are you sure you want to logout?",
+          icon: "warning",
+          showCancelButton: true,        
+          confirmButtonText: "Yes",     
+          cancelButtonText: "No",        
+          reverseButtons: true,      
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/");
+          } 
+          // else: user clicked "No" or closed the dialog → do nothing
+        });
+      };
     
-
 
   const handleSubmit = ()=>{
     if(!addBook.name || !addBook.author){
@@ -132,7 +142,7 @@ type Book = {
           
          <Sidebar />
          <div className='flex flex-wrap justify-center'>
-             <button><Link style={{textDecoration:'none', color:'black'}} href='/'>Logout</Link></button>
+             <button onClick={handleLogout}>Logout</button>
          </div>
             </div>
             

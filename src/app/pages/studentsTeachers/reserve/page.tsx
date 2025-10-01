@@ -21,6 +21,22 @@ const page = () => {
                 visible:{opacity:1, x:0}
               }
 
+                const handleLogout = () => {
+                  Swal.fire({
+                    title: "Are you sure you want to logout?",
+                    icon: "warning",
+                    showCancelButton: true,        
+                    confirmButtonText: "Yes",     
+                    cancelButtonText: "No",        
+                    reverseButtons: true,      
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      router.push("/");
+                    } 
+                    // else: user clicked "No" or closed the dialog → do nothing
+                  });
+                };
+
  const router = useRouter();
 
     const [addReserve, setaddReserve] = useState({
@@ -74,7 +90,7 @@ const page = () => {
     <div className='logo'><span style={{fontSize:50,color:'orange', fontWeight:'bold'}}>L</span><span style={{fontSize:40,color:'white', fontWeight:'bold'}}>i</span><span style={{fontSize:35,color:'orange', fontWeight:'bold'}}>b</span><span style={{fontSize:25, color:'white', fontWeight:'bold'}}>rary</span></div>
       <SidebarStudentTeacher />
          <div className='flex flex-wrap justify-center'>
-             <button><Link style={{textDecoration:'none', color:'black'}}  href='/'>Logout</Link></button>
+             <button onClick={handleLogout}>Logout</button>
          </div>
             </div>
 
