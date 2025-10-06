@@ -10,6 +10,9 @@ import { useInView } from 'react-intersection-observer';
 import Sidebar from '@/app/components/Sidebar';
 import { MdLightbulb } from "react-icons/md";
 import { useRouter } from 'next/navigation';
+import { MdLibraryBooks } from "react-icons/md";
+import { GiArchiveRegister } from "react-icons/gi";
+import { MdLightMode } from "react-icons/md";
 const page = () => {
 
            const variants = {
@@ -37,16 +40,19 @@ const page = () => {
                 <h1 style={{marginTop:20, marginBottom:30}} className=' text-blue-950 text-3xl font-bold'>Librarian</h1>
              <div className='right-sub flex flex-wrap justify-center text-center text-xl'>
             <div  className='right1'>
-            <a href='/pages/librarian/registerdashboard'>
+            <GiArchiveRegister size={30} className='inline' />
+            <a style={{marginLeft:10}} href='/pages/librarian/registerdashboard'>
              Register
             </a>
               </div>
                <div  className='right2'>
-              <a href='/pages/librarian/bookdashboard'>
+          <MdLibraryBooks size={30} className='inline' />
+              <a style={{marginLeft:10}} href='/pages/librarian/bookdashboard'>
                 Books</a>
               </div>
                <div  className='right3'>
-                   <a href='/pages/librarian/renewdashboard'>
+              <MdLightMode size={30} className='inline' />
+                   <a style={{marginLeft:10}} href='/pages/librarian/renewdashboard'>
                       Renew
                    </a>
               </div>

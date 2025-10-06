@@ -4,12 +4,10 @@ import Link from 'next/link';
 import './Nav.css';
 import { easeOut, motion} from 'framer-motion';
 import Image from 'next/image';
-import Data2 from '../Data/Data2';
 import Data from '../Data/Data';
 import { useInView } from 'react-intersection-observer';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import Footer from './Footer';
 import { MdLibraryBooks } from "react-icons/md";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import { FaHandshakeSimple } from "react-icons/fa6";
@@ -179,8 +177,6 @@ const Nav = () => {
      </motion.div>
 
       </div>
-
-
 
 
         <motion.div id='about' className='flex flex-wrap justify-center'
